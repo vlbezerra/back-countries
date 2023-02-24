@@ -1,0 +1,66 @@
+---
+_schema-version: '3.1'
+ID: back-countries
+version: 1.0.2
+description: "A simple CAP project."
+
+modules:
+  - name: back-countries-srv
+    type: nodejs
+    path: .
+    build-parameters:
+      builder: custom
+      commands:
+        - npm run build:cds
+        - npm run build:ts
+    parameters:
+      buildpack: nodejs_buildpack
+      command: node dist/main
+      memory: 1024M
+    provides:
+      - name: srv-api # required by consumers of CAP services (e.g. approuter)
+        properties:
+          srv-url: ${default-url}
+    requires:
+      - name: back-countries-db
+      - name: back-countries-auth
+
+  - name: back-countries-db-deployer
+    type: hdb
+    path: gen/db
+    parameters:
+      buildpack: nodejs_buildpack
+    requires:
+      - name: back-countries-db
+
+  - name: back-countries
+    type: approuter.nodejs
+    path: app/ # from cds.env.folders. Consider also cds.env.build.target -> gen/app
+    parameters:
+      keep-existing-routes: true
+      disk-quota: 256M
+      memory: 256M
+    requires:
+      - name: srv-api
+        group: destinations
+        properties:
+          name: srv-api # must be used in xs-app.json as well
+          url: ~{srv-url}
+          forwardAuthToken: true
+      - name: back-countries-auth
+
+resources:
+  - name: back-countries-db
+    type: com.sap.xs.hdi-container
+    parameters:
+      service: hana
+      service-plan: hdi-shared
+  - name: back-countries-auth
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./xs-security.json
+      config:
+        xsappname: back-countries-${org}-${space}
+        tenant-mode: dedicated
