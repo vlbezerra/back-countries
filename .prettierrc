@@ -1,10 +1,4 @@
 {
-    "trailingComma": "es5",
-    "tabWidth": 4,
-    "semi": true,
-    "singleQuote": false,
-    "quote-props": "as-needed",
-    "printWidth": 160,
-    "endOfLine": "auto",
-    "arrowParens": "avoid"
+    "singleQuote": true,
+    "trailingComma": "all"
 }
