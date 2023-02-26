@@ -1,7 +1,7 @@
 ---
 _schema-version: '3.1'
 ID: back-countries
-version: 1.0.2
+version: 1.0.3
 description: "A simple CAP project."
 
 modules:
@@ -29,11 +29,13 @@ modules:
 
   - name: back-countries-db-deployer
     type: hdb
-    path: db
+    path: gen/db
     build-parameters:
       ignore: [ "default-env.json", "node_modules" ]
     requires:
       - name: back-countries-db
+        properties:
+          TARGET_CONTAINER: '~{hdi-service-name}'
     parameters:
       buildpack: nodejs_buildpack
       disk-quota: 1024M

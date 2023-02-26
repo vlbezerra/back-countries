@@ -1,6 +1,10 @@
 {
     "build": {
-        "target": "gen"
+        "target": "gen",
+        "tasks": [
+            { "for": "hana", "src": "db", "options": { "model": ["db", "srv"] } },
+            { "for": "node-cf", "src": "srv", "options": { "model": ["db", "srv"] } }
+        ]
     },
     "features": {
         "assert_integrity": false
@@ -11,7 +15,8 @@
     "[production]": {
         "requires": {
             "db": {
-                "kind": "hana"
+                "kind": "hana",
+                "model": ["db", "srv"]
             },
             "uaa": {
                 "kind": "xsuaa"
@@ -22,5 +27,8 @@
         "db": {
             "kind": "sqlite"
         }
+    },
+    "odata": {
+        "version": "v4"
     }
 } 
