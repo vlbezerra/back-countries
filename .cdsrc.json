@@ -1,16 +1,17 @@
 {
     "build": {
-        "target": "gen",
-        "tasks": [
-            { "for": "hana", "src": "db", "options": { "model": ["db", "srv"] } },
-            { "for": "node-cf", "src": "srv", "options": { "model": ["db", "srv"] } }
-        ]
+        "target": "gen"
+    },
+    "features": {
+        "assert_integrity": false
+    },
+    "hana": {
+        "deploy-format": "hdbtable"
     },
     "[production]": {
         "requires": {
             "db": {
-                "kind": "hana",
-                "model": ["db", "srv"]
+                "kind": "hana"
             },
             "uaa": {
                 "kind": "xsuaa"
@@ -19,13 +20,7 @@
     },
     "requires": {
         "db": {
-            "kind": "sqlite",
-            "credentials": {
-                "database": "bookshop.db"
-            }
+            "kind": "sqlite"
         }
-    },
-    "odata": {
-        "version": "v4"
     }
-}
+} 

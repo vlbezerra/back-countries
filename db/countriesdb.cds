@@ -1,7 +1,10 @@
+using {
+    managed,
+    cuid
+} from '@sap/cds/common';
+
 namespace countriesDb;
 
-using { cuid, managed } from '@sap/cds/common';
-
-entity Logs : cuid, managed {
+entity Logs: cuid, managed {
     path: String(200);
 }

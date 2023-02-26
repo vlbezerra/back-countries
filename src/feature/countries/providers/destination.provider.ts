@@ -1,11 +1,11 @@
 import { useOrFetchDestination } from '@sap-cloud-sdk/core';
 
 export const destination = useOrFetchDestination({
-  destinationName: 'countries',
+    destinationName: 'countries',
 })
-  .then((destination) => {
-    return destination;
-  })
-  .catch((err) => {
-    return err;
-  });
+    .then((destination) => {
+        return destination;
+    })
+    .catch((err) => {
+        return err;
+    });

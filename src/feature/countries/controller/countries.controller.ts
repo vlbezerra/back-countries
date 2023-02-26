@@ -11,26 +11,8 @@ export class ContriesController {
   ) {}
 
   @common.Get('countries')
-  async getCountries(@common.Req() req: any): Promise<CountryDTO[]> {
-    const { lang } = req.query;
-    const isAuthorized = req.authInfo.checkLocalScope('read');
-
-    if (isAuthorized) {
-      this.logService.log(lang, req.authInfo.getEmail());
-      const response: any = await this.countriesService.getCountries(lang);
-      const countries: CountryDTO[] = response.data.map(
-        (item: any) =>
-          new CountryDTO(
-            item.name,
-            item.capital,
-            item.region,
-            item.subregion,
-            item.flags.png,
-          ),
-      );
-      return countries;
-    } else {
-      throw new common.HttpException('Forbidden', common.HttpStatus.FORBIDDEN);
-    }
+  async getCountries(@common.Req() req: any): Promise<String> {
+      return "API countries OK";
   }
+  
 }
