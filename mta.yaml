@@ -99,7 +99,12 @@ modules:
     requires:
       - name: countries_html5_repo_runtime
       - name: uaa_countries
-      - name: destinations-countries      
+      - name: srv-api
+        group: destinations
+        properties:
+          name: srv-api
+          url: ~{srv-url}
+          forwardAuthToken: true        
 #-----------------------------------------------------------------
 resources: #######################################################
 #-----------------------------------------------------------------
