@@ -2,7 +2,6 @@ import * as common from '@nestjs/common';
 import { CountryDTO } from '../model/contry.dto';
 import { CountriesService } from '../services/countries.service';
 import { LogService } from '../services/log.service';
-import { getUserToken } from '@sap-cloud-sdk/connectivity';
 
 @common.Controller('api')
 export class ContriesController {
@@ -25,7 +24,7 @@ export class ContriesController {
             item.flags.png,
           ),
       ): [];
-      await this.logService.log(lang, 'vb@test.com');
+      await this.logService.log(lang, 'anonymous');
       return countries;
   }
   

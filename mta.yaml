@@ -1,23 +1,19 @@
 ---
 _schema-version: '3.1'
 ID: back-countries
-version: 1.0.3
+version: 1.1.0
 description: "A simple CAP project."
 
 modules:
 ################# BACK MODULE ########################
   - name: back-countries-srv
     type: nodejs
-    path: .
+    path: gen/srv
     build-parameters:
       ignore: [ "default-env.json", "node_modules" ]
-      builder: custom
-      commands:
-        - npm run build:cds
-        - npm run build:ts
     parameters:
       buildpack: nodejs_buildpack
-      command: node ./gen/srv/srv/server.js
+      command: node srv/server.js
       disk-quota: 2048M
       memory: 1024M
     provides:
