@@ -1,7 +1,7 @@
-import { useOrFetchDestination } from '@sap-cloud-sdk/core';
+import { getDestination } from '@sap-cloud-sdk/connectivity';
 
-export const destination = useOrFetchDestination({
-    destinationName: 'countries',
+export const destination = getDestination({
+    destinationName: 'countries-destination',
 })
     .then((destination) => {
         return destination;

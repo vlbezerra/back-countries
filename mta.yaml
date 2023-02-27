@@ -5,6 +5,7 @@ version: 1.0.3
 description: "A simple CAP project."
 
 modules:
+################# BACK MODULE ########################
   - name: back-countries-srv
     type: nodejs
     path: .
@@ -17,8 +18,8 @@ modules:
     parameters:
       buildpack: nodejs_buildpack
       command: node ./gen/srv/srv/server.js
-      disk-quota: 1024M
-      memory: 512M
+      disk-quota: 2048M
+      memory: 1024M
     provides:
       - name: srv-api
         properties:
@@ -26,7 +27,8 @@ modules:
     requires:
       - name: back-countries-db
       - name: back-countries-auth
-
+      - name: destinations-countries
+################# DB DEPLOYER MODULE ########################
   - name: back-countries-db-deployer
     type: hdb
     path: gen/db
@@ -40,8 +42,9 @@ modules:
       buildpack: nodejs_buildpack
       disk-quota: 1024M
       memory: 512M
-
-resources:
+#############################################################      
+resources: ##################################################
+#############################################################
   - name: back-countries-db
     type: com.sap.xs.hdi-container
     parameters:
@@ -49,6 +52,7 @@ resources:
       service-plan: hdi-shared
     properties:
       hdi-service-name: ${service-name}
+#############################################################
   - name: back-countries-auth
     type: org.cloudfoundry.managed-service
     parameters:
@@ -58,3 +62,10 @@ resources:
       config:
         xsappname: back-countries-${org}-${space}
         tenant-mode: dedicated
+#############################################################
+  - name: destinations-countries
+    parameters:
+      service-plan: lite
+      service: destination
+    type: org.cloudfoundry.managed-service
+#############################################################
