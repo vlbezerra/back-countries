@@ -1,0 +1,19 @@
+{
+    "authenticationMethod": "route",
+    "routes": [
+      {
+        "source": "/user-api/currentUser$",
+        "target": "/currentUser",
+        "service": "sap-approuter-userapi"
+      }
+    ],
+    "cors" : [{
+      "uriPattern": "^(.*)$",
+      "allowedOrigin": [
+          {
+          "host": "*.cfapps.us10-001.hana.ondemand.com",
+          "protocol": "https"
+          }
+      ]
+  }]
+  }

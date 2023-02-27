@@ -1,0 +1,26 @@
+{
+  "sap.app": {
+    "id": "countriesModule",
+    "applicationVersion": {
+      "version": "1.0.0"
+    }
+  },
+  "title": "Countries",
+  "crossNavigation": {
+    "inbounds": {
+      "intent1": {
+        "signature": {
+          "parameters": {
+            "additionalParameters": "allowed"
+          },
+          "semanticObject": "countriesfront",
+          "action": "display",
+          "title": "Countries"
+        }
+      }
+    }
+  },
+  "sap.cloud": {
+    "service": "countriesRouter"
+  }
+}

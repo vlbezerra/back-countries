@@ -1,0 +1,27 @@
+{
+  "welcomeFile": "/index.html",
+  "authenticationMethod": "route",
+  "logout": {
+    "logoutEndpoint": "/do/logout"
+  },
+  "routes": [
+    {
+        "source": "^/user-api(.*)",
+        "target": "$1",
+        "service": "countries-approuter"
+    },
+    {
+      "authenticationType": "none",
+      "csrfProtection": false,
+      "source": "^/api/countries",
+      "destination": "front-to-back",
+      "target": "$1"
+    },
+    {
+      "source": "^(.*)$",
+      "target": "$1",
+      "service": "html5-apps-repo-rt",
+      "authenticationType": "xsuaa"
+    }
+  ]
+}
